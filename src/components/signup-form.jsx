@@ -3,9 +3,10 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Link } from "react-router-dom";
+import { useAuth } from "../contexts/authContext";
 
 export function SignUpForm({ className, ...props }) {
-  //const { login } = useAuth();
+  const { register } = useAuth();
   const sub = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -15,6 +16,7 @@ export function SignUpForm({ className, ...props }) {
     };
     if (payload.username.trim() !== "" && payload.password.trim() !== "") {
       console.log(payload);
+      register(payload);
     }
   };
   return (

@@ -6,7 +6,9 @@ export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
 
-  useEffect(() => {});
+  useEffect(() => {
+    checkUser();
+  }, [user]);
 
   const checkUser = async () => {
     try {
@@ -17,15 +19,18 @@ export default function AuthProvider({ children }) {
       const session = await fetch(
         `${import.meta.env.VITE_DB_URI}/api/auth/me`,
         {
-          method: "POST",
+          method: "GET",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
-          body: { token: token },
         }
       );
-      return session ? { ...session, token: token } : null;
+      if (session.ok) {
+        const data = await session.json();
+        setUser({ ...data, token: token });
+      }
     } catch (err) {
       console.log(err);
     }
@@ -45,8 +50,33 @@ export default function AuthProvider({ children }) {
         }
       );
       if (response.ok) {
-        localStorage.setItem("token", response.token);
-        //checkUser();
+        const data = await response.json();
+        localStorage.setItem("token", data.token);
+        checkUser();
+      } else if (response.status === 401) {
+        console.log("error 401");
+        console.log(response);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const register = async (userinfo) => {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_DB_URI}/api/auth/register`,
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(userinfo),
+        }
+      );
+      if (response.ok) {
+        console.log("response ok !");
       } else if (response.status === 401) {
         console.log("error 401");
         console.log(response);
@@ -64,6 +94,7 @@ export default function AuthProvider({ children }) {
   const contextValues = {
     login,
     logout,
+    register,
     user: user,
   };
 
