@@ -10,9 +10,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Link } from "react-router-dom";
+import { useAuth } from "../contexts/authContext";
 
 export function LoginForm({ className, ...props }) {
-  //const { login } = useAuth();
+  const { login } = useAuth();
   const connect = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -22,6 +23,9 @@ export function LoginForm({ className, ...props }) {
     };
     if (payload.username.trim() !== "" && payload.password.trim() !== "") {
       console.log(payload);
+      login(payload);
+    } else {
+      console.log("chaine vide");
     }
   };
 

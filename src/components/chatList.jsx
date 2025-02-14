@@ -10,7 +10,7 @@ function ChatList() {
   const { id } = useParams();
 
   useEffect(() => {
-    const socket = new WebSocket("http://172.27.74.25:3300/ws");
+    const socket = new WebSocket(`${import.meta.env.VITE_DB_URI}/ws`);
     socket.onopen = () => {
       console.log("connected");
     };
@@ -19,7 +19,9 @@ function ChatList() {
       console.log(event.data);
     };
     const getMessage = async () => {
-      const res = await fetch(`http://172.27.74.25:3300/api/messages/${id}`);
+      const res = await fetch(
+        `${import.meta.env.VITE_DB_URI}/api/messages/${id}`
+      );
       const data = await res.json();
       console.log(data);
       setMsgs(data);

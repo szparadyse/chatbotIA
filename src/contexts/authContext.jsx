@@ -14,14 +14,17 @@ export default function AuthProvider({ children }) {
       if (!token) {
         return null;
       }
-      const session = await fetch(`${process.env.VITE_DB_URI}/api/auth/me`, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-        body: { token: token },
-      });
+      const session = await fetch(
+        `${import.meta.env.VITE_DB_URI}/api/auth/me`,
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: { token: token },
+        }
+      );
       return session ? { ...session, token: token } : null;
     } catch (err) {
       console.log(err);
@@ -31,21 +34,19 @@ export default function AuthProvider({ children }) {
   const login = async (userinfo) => {
     try {
       const response = await fetch(
-        `${process.env.VITE_DB_URI}/api/auth/login`,
+        `${import.meta.env.VITE_DB_URI}/api/auth/login`,
         {
           method: "POST",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
           },
-          body: userinfo,
+          body: JSON.stringify(userinfo),
         }
       );
-      if (response.status === 200) {
-        setUser("200 ! ");
-        setUser({ ...response, token: response.token });
+      if (response.ok) {
         localStorage.setItem("token", response.token);
-        checkUser();
+        //checkUser();
       } else if (response.status === 401) {
         console.log("error 401");
         console.log(response);
