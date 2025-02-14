@@ -25,17 +25,15 @@ import ChatList from "../../components/chatList";
 import { ShimmerButton } from "../../components/magicui/shimmer-button";
 import { Avatar, AvatarImage } from "../../components/ui/avatar";
 
-import { useNavigate, useParams } from "react-router-dom";
+import {  useParams } from "react-router-dom";
 import { DropdownMenuShortcut } from "../../components/ui/dropdown-menu";
-import { messageServices } from "../../services/messageServices";
-import { Textarea } from "../../components/ui/textarea";
 import { useAuth } from "../../contexts/authContext";
+import { messageServices } from "../../services/messageServices";
 
 function Chats() {
   const inputRef = useRef(""); // 🔹 Référence vers l'input
   const { id } = useParams();
   const { user } = useAuth();
-  const navigate = useNavigate()
   const [roomId,setRoomId] = useState("")
 
   // ✅ Fonction qui ajoute "@NexIA" dans l'input
@@ -59,8 +57,17 @@ function Chats() {
           },
           content: inputRef.current.value,
         };
-        await messageServices.sendMessage(payload, id);
-        inputRef.current.value = "";
+        
+        // Vérifier si le message contient "@NextIA"
+        if (payload.content.includes("@NexIA")) {
+          // Supprimer "@NextIA" de la chaîne
+          const messageSansNextIA = payload.content.replace("@NexIA", "").trim();
+          console.log("Message sans @NextIA:", messageSansNextIA);
+        }
+
+          await messageServices.sendMessage(payload, id);
+          inputRef.current.value = "";
+        
       }
     } catch (error) {
       console.error(error);
