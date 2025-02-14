@@ -7,7 +7,7 @@ import { useAuth } from "../contexts/authContext";
 
 export function SignUpForm({ className, ...props }) {
   const { register } = useAuth();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const sub = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -17,7 +17,7 @@ export function SignUpForm({ className, ...props }) {
     };
     if (payload.username.trim() !== "" && payload.password.trim() !== "") {
       console.log(payload);
-      register(payload).then((res)=>res===true?navigate('/login'):"");
+      register(payload).then((res) => (res === true ? navigate("/login") : ""));
     }
   };
   return (
@@ -27,9 +27,9 @@ export function SignUpForm({ className, ...props }) {
       {...props}
     >
       <div className="flex flex-col items-center gap-2 text-center">
-        <h1 className="text-2xl font-bold">Littler</h1>
+        <h1 className="text-2xl font-bold">NexAI</h1>
         <p className="text-balance text-sm text-muted-foreground">
-          première règle du Littler club: Tu ne parles pas du Littler club
+          Rejoins le premier chat sans censure avec une IA intégrée.
         </p>
       </div>
       <div className="grid gap-6">
@@ -44,7 +44,7 @@ export function SignUpForm({ className, ...props }) {
           <Input id="password" type="password" name="password" required />
         </div>
         <Button type="submit" className="w-full">
-          Rejoindre le parti
+          rejoins la team DTR
         </Button>
       </div>
       <div className="text-center text-sm">

@@ -8,10 +8,10 @@ export default function LoginPage() {
       <div className="flex w-full max-w-sm flex-col gap-6">
         <div className="flex">
           <img
-            src="https://t3.ftcdn.net/jpg/05/78/88/58/240_F_578885811_pL5e4fXxC473DjNi4t2AuNnldS6iJCgW.jpg"
+            src="https://cdn-icons-png.flaticon.com/512/120/120082.png"
             className="mr-2 size-6 rounded-full"
           />
-          Little inc.
+          Babylone inc.
         </div>
         <LoginForm />
       </div>

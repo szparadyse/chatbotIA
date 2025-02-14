@@ -32,7 +32,7 @@ export function LoginForm({ className, ...props }) {
     <div className={cn("flex flex-col gap-6", className)} {...props}>
       <Card>
         <CardHeader className="text-center">
-          <CardTitle className="text-xl"> Littler </CardTitle>
+          <CardTitle className="text-xl"> NexAI</CardTitle>
           <CardDescription></CardDescription>
         </CardHeader>
         <CardContent>
@@ -41,7 +41,7 @@ export function LoginForm({ className, ...props }) {
               <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t"></div>
               <div className="grid gap-6">
                 <div className="grid gap-3">
-                  <Label htmlFor="username">Ton blaze</Label>
+                  <Label htmlFor="username">Pseudo</Label>
                   <Input id="username" type="text" name="username" required />
                 </div>
                 <div className="grid gap-3">
@@ -51,7 +51,7 @@ export function LoginForm({ className, ...props }) {
                       href="#"
                       className="ml-auto text-sm underline-offset-4 hover:underline"
                     >
-                      T'as alzheimer? clique ici
+                      Comment ça mon reuf?
                     </a>
                   </div>
                   <Input
@@ -62,7 +62,7 @@ export function LoginForm({ className, ...props }) {
                   />
                 </div>
                 <Button type="submit" className="w-full">
-                  Let's go
+                  Let's goooo
                 </Button>
               </div>
               <div className="text-center text-sm">
@@ -77,7 +77,7 @@ export function LoginForm({ className, ...props }) {
       </Card>
       <div className="text-muted-foreground *:[a]:hover:text-primary text-center text-xs text-balance *:[a]:underline *:[a]:underline-offset-4">
         By clicking continue, you agree to our <a href="#">Terms of Service</a>{" "}
-        and <a href="#">Privacy Policy</a>.
+        and <a href="#<">Privacy Policy</a>.
       </div>
     </div>
   );
