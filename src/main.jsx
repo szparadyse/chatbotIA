@@ -7,16 +7,22 @@ import "./index.css";
 import LoginPage from "./app/login/page";
 import SignUpPage from "./app/signup/page";
 import AuthProvider from "./contexts/authContext";
+import PublicRoute from "./app/routes/PublicRoute";
+import PrivateRoute from "./app/routes/PrivateRoute";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<SignUpPage />} />
-          <Route element={<Layout />}>
-            <Route path="/room/:id" element={<Chats />} />
+          <Route element={<PublicRoute />}>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignUpPage />} />
+          </Route>
+          <Route element={<PrivateRoute />}>
+            <Route element={<Layout />}>
+              <Route path="/room/:id" element={<Chats />} />
+            </Route>
           </Route>
         </Routes>
       </BrowserRouter>
