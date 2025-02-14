@@ -17,7 +17,7 @@ function ChatList() {
 
     socket.onmessage = (event) => {
       console.log(event.data);
-      setMsgs(prev=>[...prev,JSON.parse(event.data)])
+      setMsgs((prev) => [...prev, JSON.parse(event.data)]);
     };
     const getMessage = async () => {
       const res = await fetch(
@@ -40,23 +40,7 @@ function ChatList() {
   return (
     <>
       {msgs.map((el, index) => {
-        const elem = {
-          type: el.type,
-          sender: el.sender,
-        };
-
-        el.type = "received";
-        /* if (el.sender.id === user.id) {
-          type = "send";
-        } */
-        return (
-          <Chat
-            key={index}
-            type={el.type}
-            sender={el.sender}
-            message={el.content}
-          />
-        );
+        return <Chat key={index} sender={el.sender} message={el.content} />;
       })}
       <div ref={chatEndRef} />
     </>

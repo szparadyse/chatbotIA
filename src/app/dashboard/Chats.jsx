@@ -29,41 +29,41 @@ import { useParams } from "react-router-dom";
 import { DropdownMenuShortcut } from "../../components/ui/dropdown-menu";
 import { messageServices } from "../../services/messageServices";
 import { Textarea } from "../../components/ui/textarea";
+import { useAuth } from "../../contexts/authContext";
 
 function Chats() {
   const inputRef = useRef(""); // 🔹 Référence vers l'input
-  const {id} = useParams()
+  const { id } = useParams();
+  const { user } = useAuth();
 
   // ✅ Fonction qui ajoute "@NexIA" dans l'input
   const useIA = () => {
     if (inputRef.current) {
-      inputRef.current.value = "@NexIA " + inputRef.current.value  ;
+      inputRef.current.value = "@NexIA " + inputRef.current.value;
       inputRef.current.focus(); // 🔹 Garde le focus sur l'input
     }
   };
 
   //Faire appel au point d'entré du back pour appeler l'ia avec les 10 dernier messages
-  const resume = ()=>{
+  const resume = () => {};
 
-  };
-
-  const sendMessage =  async ()=>{
+  const sendMessage = async () => {
     try {
-      if (inputRef.current.value.trim() !== "" ){
+      if (inputRef.current.value.trim() !== "") {
         const payload = {
-          sender:{
-            id:'3543543',
-            username:'BOB'
+          sender: {
+            id: user.id,
+            username: user.username,
           },
-          content : inputRef.current.value,
-        }
-        await messageServices.sendMessage(payload,id);
+          content: inputRef.current.value,
+        };
+        await messageServices.sendMessage(payload, id);
         inputRef.current.value = "";
-      } 
+      }
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   return (
     <div className="flex justify-center align-center pt-12">
@@ -82,7 +82,6 @@ function Chats() {
           <ChatList />
         </CardContent>
         <CardFooter className="flex justify-between gap-2 mt-4">
-
           {/* ✅ Menu déroulant avec ShimmerButton */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -94,12 +93,18 @@ function Chats() {
               <DropdownMenuLabel>NexIA</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuGroup>
-                <DropdownMenuItem className="flex items-center gap-2" onClick={resume}>
+                <DropdownMenuItem
+                  className="flex items-center gap-2"
+                  onClick={resume}
+                >
                   <FileText />
                   <span>Résumer</span>
                   <DropdownMenuShortcut>⇧⌘R</DropdownMenuShortcut>
                 </DropdownMenuItem>
-                <DropdownMenuItem className="flex items-center gap-2" onClick={useIA}>
+                <DropdownMenuItem
+                  className="flex items-center gap-2"
+                  onClick={useIA}
+                >
                   <BotMessageSquare />
                   <span>Ask</span>
                   <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
@@ -111,7 +116,7 @@ function Chats() {
           {/* ✅ Ajout de ref sur l'input */}
           <form action={sendMessage} className="flex w-full gap-2">
             {/* <Textarea ref={inputRef} placeholder="Message..." /> */}
-            <Input  ref={inputRef} placeholder="Message..."/>
+            <Input ref={inputRef} placeholder="Message..." />
             <Button type="submit">Send</Button>
           </form>
         </CardFooter>

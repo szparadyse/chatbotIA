@@ -4,10 +4,10 @@ const authContext = createContext();
 
 export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [isLoading, setIsLoading] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    checkUser();
+    checkUser().then(() => setIsLoading(false));
   }, []);
 
   const checkUser = async () => {
@@ -100,7 +100,7 @@ export default function AuthProvider({ children }) {
 
   return (
     <authContext.Provider value={contextValues}>
-      {children}
+      {isLoading ? "loading...." : children}
     </authContext.Provider>
   );
 }
