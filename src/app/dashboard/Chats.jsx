@@ -20,12 +20,12 @@ import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { AvatarFallback } from "@radix-ui/react-avatar";
 import { Bot, BotMessageSquare, FileText } from "lucide-react";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import ChatList from "../../components/chatList";
 import { ShimmerButton } from "../../components/magicui/shimmer-button";
 import { Avatar, AvatarImage } from "../../components/ui/avatar";
 
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { DropdownMenuShortcut } from "../../components/ui/dropdown-menu";
 import { messageServices } from "../../services/messageServices";
 import { Textarea } from "../../components/ui/textarea";
@@ -35,6 +35,8 @@ function Chats() {
   const inputRef = useRef(""); // 🔹 Référence vers l'input
   const { id } = useParams();
   const { user } = useAuth();
+  const navigate = useNavigate()
+  const [roomId,setRoomId] = useState("")
 
   // ✅ Fonction qui ajoute "@NexIA" dans l'input
   const useIA = () => {
@@ -65,9 +67,17 @@ function Chats() {
     }
   };
 
+ 
+
   return (
-    <div className="flex justify-center align-center pt-12">
-      <Card className="w-[700px] h-auto">
+    <div className="flex flex-col w-full pt-2 ">
+      <div className="flex gap-2 w-[700px] mb-2 self-center">
+        <Input onChange={(e)=>setRoomId(e.target.value)} value={roomId} placeholder="Navigate to a specific room...."/>
+        <Button asChild>
+          <a href={`/room/${roomId}`}>Go</a>
+        </Button>
+      </div>
+      <Card className="w-[700px] h-auto mx-auto">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Avatar>
