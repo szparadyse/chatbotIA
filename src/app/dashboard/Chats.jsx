@@ -25,15 +25,19 @@ import ChatList from "../../components/chatList";
 import { ShimmerButton } from "../../components/magicui/shimmer-button";
 import { Avatar, AvatarImage } from "../../components/ui/avatar";
 
+import { useParams } from "react-router-dom";
 import { DropdownMenuShortcut } from "../../components/ui/dropdown-menu";
+import { messageServices } from "../../services/messageServices";
+import { Textarea } from "../../components/ui/textarea";
 
 function Chats() {
-  const inputRef = useRef(null); // 🔹 Référence vers l'input
+  const inputRef = useRef(""); // 🔹 Référence vers l'input
+  const {id} = useParams()
 
   // ✅ Fonction qui ajoute "@NexIA" dans l'input
   const useIA = () => {
     if (inputRef.current) {
-      inputRef.current.value = " @NexIA " + inputRef.current.value  ;
+      inputRef.current.value = "@NexIA " + inputRef.current.value  ;
       inputRef.current.focus(); // 🔹 Garde le focus sur l'input
     }
   };
@@ -42,6 +46,24 @@ function Chats() {
   const resume = ()=>{
 
   };
+
+  const sendMessage =  async ()=>{
+    try {
+      if (inputRef.current.value.trim() !== "" ){
+        const payload = {
+          sender:{
+            id:'3543543',
+            username:'BOB'
+          },
+          content : inputRef.current.value,
+        }
+        await messageServices.sendMessage(payload,id);
+        inputRef.current.value = "";
+      } 
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <div className="flex justify-center align-center pt-12">
@@ -87,8 +109,11 @@ function Chats() {
           </DropdownMenu>
 
           {/* ✅ Ajout de ref sur l'input */}
-          <Input ref={inputRef} placeholder="Message..." />
-          <Button>Send</Button>
+          <form action={sendMessage} className="flex w-full gap-2">
+            {/* <Textarea ref={inputRef} placeholder="Message..." /> */}
+            <Input  ref={inputRef} placeholder="Message..."/>
+            <Button type="submit">Send</Button>
+          </form>
         </CardFooter>
       </Card>
     </div>
