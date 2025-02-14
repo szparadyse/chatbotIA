@@ -35,6 +35,7 @@ function Chats() {
   const { id } = useParams();
   const { user } = useAuth();
   const [roomId,setRoomId] = useState("")
+  const [isThinking, setisThinking] = useState(false);
 
   // ✅ Fonction qui ajoute "@NexIA" dans l'input
   const useIA = () => {
@@ -64,7 +65,9 @@ function Chats() {
         if (payload.content.includes("@NexIA")) {
           // Supprimer "@NextIA" de la chaîne
           const messageSansNextIA = payload.content.replace("@NexIA", "").trim();
+          setisThinking(true);
           await messageServices.sendRequestToIA(messageSansNextIA, id)
+          setisThinking(false);
         }
       }
     } catch (error) {
