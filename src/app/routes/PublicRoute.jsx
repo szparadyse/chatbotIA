@@ -4,7 +4,7 @@ import { useAuth } from "../../contexts/authContext";
 
 const PublicRoute = () => {
   const { user } = useAuth();
-  return !user ? <Outlet /> : <Navigate to="/room/1" />;
+  return !user ? <Outlet /> : <Navigate to="/" />;
 };
 
 export default PublicRoute;

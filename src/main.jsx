@@ -9,6 +9,7 @@ import SignUpPage from "./app/signup/page";
 import AuthProvider from "./contexts/authContext";
 import PublicRoute from "./app/routes/PublicRoute";
 import PrivateRoute from "./app/routes/PrivateRoute";
+import { HomePage } from "./app/dashboard/Home";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -22,6 +23,7 @@ createRoot(document.getElementById("root")).render(
           <Route element={<PrivateRoute />}>
             <Route element={<Layout />}>
               <Route path="/room/:id" element={<Chats />} />
+              <Route path="/" element={<HomePage/>}/>
             </Route>
           </Route>
         </Routes>

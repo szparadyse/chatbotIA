@@ -2,11 +2,12 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Link, redirect } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/authContext";
 
 export function SignUpForm({ className, ...props }) {
   const { register } = useAuth();
+  const navigate = useNavigate()
   const sub = (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -16,7 +17,7 @@ export function SignUpForm({ className, ...props }) {
     };
     if (payload.username.trim() !== "" && payload.password.trim() !== "") {
       console.log(payload);
-      register(payload);
+      register(payload).then((res)=>res===true?navigate('/login'):"");
     }
   };
   return (

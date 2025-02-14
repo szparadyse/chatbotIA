@@ -77,12 +77,15 @@ export default function AuthProvider({ children }) {
       );
       if (response.ok) {
         console.log("response ok !");
+        return true
       } else if (response.status === 401) {
         console.log("error 401");
         console.log(response);
+        return false
       }
     } catch (err) {
       console.log(err);
+      return false
     }
   };
 
