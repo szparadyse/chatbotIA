@@ -16,8 +16,8 @@ function ChatList() {
     };
 
     socket.onmessage = (event) => {
-      console.log(event.data);
-      if (event.data.idRoom === id) {
+      const parse = JSON.parse(event.data);
+      if (parse.idRoom == id) {
         setMsgs((prev) => [...prev, JSON.parse(event.data)]);
       }
     };
