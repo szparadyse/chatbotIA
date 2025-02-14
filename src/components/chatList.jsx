@@ -17,7 +17,9 @@ function ChatList() {
 
     socket.onmessage = (event) => {
       console.log(event.data);
-      setMsgs((prev) => [...prev, JSON.parse(event.data)]);
+      if (event.data.idRoom === id) {
+        setMsgs((prev) => [...prev, JSON.parse(event.data)]);
+      }
     };
     const getMessage = async () => {
       const res = await fetch(
