@@ -16,7 +16,7 @@ export const messageServices = {
       {
         method: "POST",
         headers: { "Content-type": "application/json" },
-        body: JSON.stringify({ prompt, max_tokens: 700 }),
+        body: JSON.stringify({ prompt, max_tokens: 100 }),
       }
     );
     if (response) console.log(response);
