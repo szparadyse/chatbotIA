@@ -25,18 +25,18 @@ import ChatList from "../../components/chatList";
 import { ShimmerButton } from "../../components/magicui/shimmer-button";
 import { Avatar, AvatarImage } from "../../components/ui/avatar";
 
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { DropdownMenuShortcut } from "../../components/ui/dropdown-menu";
-import { messageServices } from "../../services/messageServices";
-import { Textarea } from "../../components/ui/textarea";
 import { useAuth } from "../../contexts/authContext";
+import { messageServices } from "../../services/messageServices";
 
 function Chats() {
   const inputRef = useRef(""); // 🔹 Référence vers l'input
   const { id } = useParams();
   const { user } = useAuth();
-  const navigate = useNavigate()
+
   const [roomId,setRoomId] = useState("")
+  const [isThinking, setisThinking] = useState(false);
 
   // ✅ Fonction qui ajoute "@NexIA" dans l'input
   const useIA = () => {
@@ -59,8 +59,17 @@ function Chats() {
           },
           content: inputRef.current.value,
         };
+        
+        // Vérifier si le message contient "@NextIA"
         await messageServices.sendMessage(payload, id);
         inputRef.current.value = "";
+        if (payload.content.includes("@NexIA")) {
+          // Supprimer "@NextIA" de la chaîne
+          const messageSansNextIA = payload.content.replace("@NexIA", "").trim();
+          setisThinking(true);
+          await messageServices.sendRequestToIA(messageSansNextIA, id)
+          setisThinking(false);
+        }
       }
     } catch (error) {
       console.error(error);
