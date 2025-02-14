@@ -1,7 +1,5 @@
 import { useEffect } from "react";
-import { useContext } from "react";
-
-const { createContext } = require("react");
+import { useContext, createContext } from "react";
 
 const authContext = createContext();
 
