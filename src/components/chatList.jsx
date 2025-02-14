@@ -37,6 +37,11 @@ function ChatList() {
   return (
     <>
       {msgs.map((el, index) => {
+        const elem = {
+          type: el.type,
+          sender: el.sender,
+        };
+
         el.type = "received";
         /* if (el.sender.id === user.id) {
           type = "send";
@@ -45,7 +50,7 @@ function ChatList() {
           <Chat
             key={index}
             type={el.type}
-            sender={[...el.sender]}
+            sender={el.sender}
             message={el.message}
           />
         );
