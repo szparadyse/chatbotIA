@@ -25,7 +25,7 @@ import ChatList from "../../components/chatList";
 import { ShimmerButton } from "../../components/magicui/shimmer-button";
 import { Avatar, AvatarImage } from "../../components/ui/avatar";
 
-import {  useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { DropdownMenuShortcut } from "../../components/ui/dropdown-menu";
 import { useAuth } from "../../contexts/authContext";
 import { messageServices } from "../../services/messageServices";
@@ -59,15 +59,13 @@ function Chats() {
         };
         
         // Vérifier si le message contient "@NextIA"
+        await messageServices.sendMessage(payload, id);
+        inputRef.current.value = "";
         if (payload.content.includes("@NexIA")) {
           // Supprimer "@NextIA" de la chaîne
           const messageSansNextIA = payload.content.replace("@NexIA", "").trim();
-          console.log("Message sans @NextIA:", messageSansNextIA);
+          await messageServices.sendRequestToIA(messageSansNextIA, id)
         }
-
-          await messageServices.sendMessage(payload, id);
-          inputRef.current.value = "";
-        
       }
     } catch (error) {
       console.error(error);
