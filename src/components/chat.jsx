@@ -1,5 +1,8 @@
 import { useAuth } from "../contexts/authContext";
-
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import remarkHighlightjs from "remark-highlight.js";
+import "../app/dashboard/Chats.css";
 function Chat({ sender, message }) {
   const { user } = useAuth();
   switch (sender.id) {
@@ -18,7 +21,9 @@ function Chat({ sender, message }) {
             Envoyé par NexIA
           </span>
           <div className="flex w-max max-w-[75%] flex-col gap-2 rounded-lg px-3 py-2 text-purple-900 text-sm bg-purple-100 my-1">
-            {message}
+            <Markdown remarkPlugins={[remarkGfm, remarkHighlightjs]}>
+              {message}
+            </Markdown>
           </div>
         </div>
       );

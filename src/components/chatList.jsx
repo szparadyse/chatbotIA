@@ -3,7 +3,7 @@ import Chat from "./chat";
 import { useAuth } from "../contexts/authContext";
 import { useParams } from "react-router-dom";
 
-function ChatList({id}) {
+function ChatList({ id }) {
   //const { user } = useAuth();
   const chatEndRef = useRef(null);
   const [msgs, setMsgs] = useState([]);
@@ -33,7 +33,7 @@ function ChatList({id}) {
     return () => {
       socket.close();
     };
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     chatEndRef.current?.scrollIntoView({ behavior: "smooth" });

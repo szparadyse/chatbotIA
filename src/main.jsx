@@ -23,15 +23,10 @@ createRoot(document.getElementById("root")).render(
           </Route>
           <Route element={<PrivateRoute />}>
             <Route element={<Layout />}>
-<<<<<<< HEAD
-              <Route path="/room/:id" element={<Chats />} />
               <Route path="/" element={<HomePage />} />
-=======
-              <Route element={<ChatLayout />} >
+              <Route element={<ChatLayout />}>
                 <Route path="/room/:id" element={<Chats />} />
-                <Route path="/" element={<HomePage/>}/>
               </Route>
->>>>>>> feat-rooms
             </Route>
           </Route>
         </Routes>
