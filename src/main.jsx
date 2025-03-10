@@ -23,7 +23,7 @@ createRoot(document.getElementById("root")).render(
           <Route element={<PrivateRoute />}>
             <Route element={<Layout />}>
               <Route path="/room/:id" element={<Chats />} />
-              <Route path="/" element={<HomePage/>}/>
+              <Route path="/" element={<HomePage />} />
             </Route>
           </Route>
         </Routes>

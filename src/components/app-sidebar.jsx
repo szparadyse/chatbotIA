@@ -1,6 +1,6 @@
-import * as React from "react"
+import * as React from "react";
 
-import { SearchForm } from "@/components/search-form"
+import { SearchForm } from "@/components/search-form";
 import {
   Sidebar,
   SidebarContent,
@@ -12,9 +12,10 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarRail,
-} from "@/components/ui/sidebar"
-import { VersionSwitcher } from "@/components/version-switcher"
-import { Bot } from "lucide-react"
+} from "@/components/ui/sidebar";
+import { Button } from "@/components/ui/button";
+import { useAuth } from "../contexts/authContext";
+import { Bot } from "lucide-react";
 
 // This is sample data.
 const data = {
@@ -25,21 +26,30 @@ const data = {
       items: [
         {
           title: "Chat Bot AI ",
-          url: "#",
+          url: "/room/1",
         },
-        
       ],
     },
+    {
+      title: "Options",
+      url: "#",
+      items: [],
+    },
   ],
-}
+};
 
-export function AppSidebar({
-  ...props
-}) {
+export function AppSidebar({ ...props }) {
+  const { logout } = useAuth();
+
   return (
-    (<Sidebar {...props}>
+    <Sidebar {...props}>
       <SidebarHeader>
-        <div className="flex pl-2 gap-2"><Bot /><h1 className="font-bold">NexAI</h1></div>
+        <div className="flex pl-2 gap-2">
+          <a href={"/"}>
+            <Bot />
+          </a>
+          <h1 className="font-bold">NexAI</h1>
+        </div>
       </SidebarHeader>
       <SidebarContent>
         {/* We create a SidebarGroup for each parent. */}
@@ -55,12 +65,20 @@ export function AppSidebar({
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))}
+
+                {item === data.navMain[1] && (
+                  <SidebarMenuItem key={"Déconnexion"}>
+                    <SidebarMenuButton asChild isActive={item.isActive}>
+                      <Button onClick={logout}>Déconnexion</Button>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                )}
               </SidebarMenu>
             </SidebarGroupContent>
           </SidebarGroup>
         ))}
       </SidebarContent>
       <SidebarRail />
-    </Sidebar>)
+    </Sidebar>
   );
 }
