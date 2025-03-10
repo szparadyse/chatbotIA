@@ -3,11 +3,10 @@ import Chat from "./chat";
 import { useAuth } from "../contexts/authContext";
 import { useParams } from "react-router-dom";
 
-function ChatList() {
+function ChatList({id}) {
   //const { user } = useAuth();
   const chatEndRef = useRef(null);
   const [msgs, setMsgs] = useState([]);
-  const { id } = useParams();
 
   useEffect(() => {
     const socket = new WebSocket(`${import.meta.env.VITE_DB_URI}/ws`);
