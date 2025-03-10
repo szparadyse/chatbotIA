@@ -79,7 +79,6 @@ function Chats() {
           await messageServices.sendRequestToIA(messageSansNextIA, id);
           setisThinking(false);
         }
-        setIsPickerVisible(false);
       }
     } catch (error) {
       console.error(error);
@@ -145,13 +144,17 @@ function Chats() {
           </DropdownMenu>
 
           {/* ✅ Ajout de ref sur l'input */}
-          <form action={sendMessage} className="flex w-full gap-2">
-            {/* <Textarea ref={inputRef} placeholder="Message..." /> */}
-            <Input ref={inputRef} placeholder="Message..." />
-            <Button type="submit">Send</Button>
+          <div className="flex w-full gap-2">
+            <form action={sendMessage} className="flex w-full gap-2">
+              {/* <Textarea ref={inputRef} placeholder="Message..." /> */}
+              <Input ref={inputRef} placeholder="Message..." />
+              <Button onClick={() => setIsPickerVisible(false)} type="submit">
+                Send
+              </Button>
+            </form>
             <div>
               <Button onClick={() => setIsPickerVisible(!isPickerVisible)}>
-                :)
+                {":)"}
               </Button>
               <div className="visible">
                 <EmojiPicker
@@ -160,7 +163,7 @@ function Chats() {
                 />
               </div>
             </div>
-          </form>
+          </div>
         </CardFooter>
       </Card>
     </div>
