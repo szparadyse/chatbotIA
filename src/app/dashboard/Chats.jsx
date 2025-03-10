@@ -152,7 +152,7 @@ function Chats() {
                 Send
               </Button>
             </form>
-            <div>
+            <div style={{ position: "relative" }}>
               <Button onClick={() => setIsPickerVisible(!isPickerVisible)}>
                 {":)"}
               </Button>
