@@ -3,20 +3,70 @@
   bottom: 66px;
   right: 0;
 }
-
-code {
-  background: rgba(255, 255, 255, 0.5);
-  color: #333;
-  padding: 3px 5px;
+/* Style général du bloc de code */
+pre code {
+  display: block;
+  padding: 1em;
+  overflow-x: auto;
+  background: #2d2d2d;
+  color: #cccccc;
   border-radius: 5px;
 }
 
-.hljs {
-  display: block;
-  padding: 10px;
+/* Mots-clés */
+.hljs-keyword {
+  color: #cc99cd;
+  font-weight: bold;
 }
 
-.hljs-keyword {
-  color: purple;
-  font-weight: 700;
+/* Chaînes de caractères */
+.hljs-string {
+  color: #f08d49;
+}
+
+/* Commentaires */
+.hljs-comment {
+  color: #75715e;
+  font-style: italic;
+}
+
+/* Fonctions */
+.hljs-function .hljs-title {
+  color: #6699cc;
+}
+
+/* Nombres */
+.hljs-number {
+  color: #f08d49;
+}
+
+/* Types et classes */
+.hljs-type,
+.hljs-class {
+  color: #ffcc66;
+}
+
+/* Opérateurs */
+.hljs-operator {
+  color: #66cccc;
+}
+
+/* Variables */
+.hljs-variable {
+  color: #c678dd;
+}
+
+/* Balises HTML et JSX */
+.hljs-tag {
+  color: #f8c555;
+}
+
+/* Attributs HTML */
+.hljs-attr {
+  color: #a9dc76;
+}
+
+/* Séparateurs et ponctuation */
+.hljs-punctuation {
+  color: #ffffff;
 }
