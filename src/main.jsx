@@ -3,13 +3,14 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Chats from "./app/dashboard/Chats";
-import "./index.css";
-import LoginPage from "./app/login/page";
-import SignUpPage from "./app/signup/page";
-import AuthProvider from "./contexts/authContext";
-import PublicRoute from "./app/routes/PublicRoute";
-import PrivateRoute from "./app/routes/PrivateRoute";
 import { HomePage } from "./app/dashboard/Home";
+import LoginPage from "./app/login/page";
+import PrivateRoute from "./app/routes/PrivateRoute";
+import PublicRoute from "./app/routes/PublicRoute";
+import SignUpPage from "./app/signup/page";
+import ChatLayout from "./components/chatLayout";
+import AuthProvider from "./contexts/authContext";
+import "./index.css";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -22,8 +23,15 @@ createRoot(document.getElementById("root")).render(
           </Route>
           <Route element={<PrivateRoute />}>
             <Route element={<Layout />}>
+<<<<<<< HEAD
               <Route path="/room/:id" element={<Chats />} />
               <Route path="/" element={<HomePage />} />
+=======
+              <Route element={<ChatLayout />} >
+                <Route path="/room/:id" element={<Chats />} />
+                <Route path="/" element={<HomePage/>}/>
+              </Route>
+>>>>>>> feat-rooms
             </Route>
           </Route>
         </Routes>

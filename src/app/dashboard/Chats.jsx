@@ -19,17 +19,17 @@ import {
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { AvatarFallback } from "@radix-ui/react-avatar";
-import { Blocks, Bot, BotMessageSquare, FileText } from "lucide-react";
-import { use, useRef, useState } from "react";
+import { Bot, BotMessageSquare, FileText } from "lucide-react";
+import { useRef, useState } from "react";
 import ChatList from "../../components/chatList";
 import { ShimmerButton } from "../../components/magicui/shimmer-button";
 import { Avatar, AvatarImage } from "../../components/ui/avatar";
 
-import { useParams } from "react-router-dom";
+import EmojiPicker from "emoji-picker-react";
+import { useNavigate, useParams } from "react-router-dom";
 import { DropdownMenuShortcut } from "../../components/ui/dropdown-menu";
 import { useAuth } from "../../contexts/authContext";
 import { messageServices } from "../../services/messageServices";
-import EmojiPicker from "emoji-picker-react";
 import "./Chats.css";
 
 function Chats() {
@@ -40,6 +40,13 @@ function Chats() {
   const [roomId, setRoomId] = useState("");
   const [isThinking, setisThinking] = useState(false);
   const [isPickerVisible, setIsPickerVisible] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/room/${id}`);
+  }
+
   // ✅ Fonction qui ajoute "@NexIA" dans l'input
   const useIA = () => {
     if (inputRef.current) {
@@ -85,74 +92,68 @@ function Chats() {
     }
   };
 
-  return (
-    <div className="flex flex-col w-full pt-2 ">
-      <div className="flex gap-2 w-[700px] mb-2 self-center">
-        <Input
-          onChange={(e) => setRoomId(e.target.value)}
-          value={roomId}
-          placeholder="Navigate to a specific room...."
-        />
-        <Button asChild>
-          <a href={`/room/${roomId}`}>Go</a>
-        </Button>
-      </div>
-      <Card className="w-[700px] h-auto mx-auto">
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-            <CardDescription className="font-bold">Rooms</CardDescription>
-          </CardTitle>
-          <Separator />
-        </CardHeader>
-        <CardContent className="overflow-auto min-h-[450px] max-h-[450px]">
-          <ChatList />
-        </CardContent>
-        <CardFooter className="flex justify-between gap-2 mt-4">
-          {/* ✅ Menu déroulant avec ShimmerButton */}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <ShimmerButton>
-                <Bot />
-              </ShimmerButton>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent side="top" align="start" className="w-56">
-              <DropdownMenuLabel>NexIA</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuGroup>
-                <DropdownMenuItem
-                  className="flex items-center gap-2"
-                  onClick={resume}
-                >
-                  <FileText />
-                  <span>Résumer</span>
-                  <DropdownMenuShortcut>⇧⌘R</DropdownMenuShortcut>
-                </DropdownMenuItem>
-                <DropdownMenuItem
-                  className="flex items-center gap-2"
-                  onClick={useIA}
-                >
-                  <BotMessageSquare />
-                  <span>Ask</span>
-                  <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
-                </DropdownMenuItem>
-              </DropdownMenuGroup>
-            </DropdownMenuContent>
-          </DropdownMenu>
+ return (
+    <div className="flex  w-full pt-2 ">
+        <div className="flex flex-col gap-2 justify-center items-center mx-auto">
+          <div className="flex gap-2 w-[700px] mb-2 self-center">
+            <Input onChange={(e)=>setRoomId(e.target.value)} value={roomId} placeholder="Navigate to a specific room...."/>
+            <Button asChild>
+              <a href={`/room/${roomId}`}>Go</a>
+            </Button>
+          </div>
+          <Card className="w-[700px] h-auto">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Avatar>
+                  <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
+                  <AvatarFallback>CN</AvatarFallback>
+                </Avatar>
+                <CardDescription className="font-bold">Rooms</CardDescription>
+              </CardTitle>
+              <Separator />
+            </CardHeader>
+            <CardContent className="overflow-auto min-h-[450px] max-h-[450px]">
+              <ChatList id={id} />
+            </CardContent>
+            <CardFooter className="flex justify-between gap-2 mt-4">
+              {/* ✅ Menu déroulant avec ShimmerButton */}
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <ShimmerButton>
+                    <Bot />
+                  </ShimmerButton>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent side="top" align="start" className="w-56">
+                  <DropdownMenuLabel>NexIA</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuGroup>
+                    <DropdownMenuItem
+                      className="flex items-center gap-2"
+                      onClick={resume}
+                    >
+                      <FileText />
+                      <span>Résumer</span>
+                      <DropdownMenuShortcut>⇧⌘R</DropdownMenuShortcut>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem
+                      className="flex items-center gap-2"
+                      onClick={useIA}
+                    >
+                      <BotMessageSquare />
+                      <span>Ask</span>
+                      <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+                    </DropdownMenuItem>
+                  </DropdownMenuGroup>
+                </DropdownMenuContent>
+              </DropdownMenu>
 
-          {/* ✅ Ajout de ref sur l'input */}
-          <div className="flex w-full gap-2">
-            <form action={sendMessage} className="flex w-full gap-2">
-              {/* <Textarea ref={inputRef} placeholder="Message..." /> */}
-              <Input ref={inputRef} placeholder="Message..." />
-              <Button onClick={() => setIsPickerVisible(false)} type="submit">
-                Send
-              </Button>
-            </form>
-            <div style={{ position: "relative" }}>
+              {/* ✅ Ajout de ref sur l'input */}
+              <form action={sendMessage} className="flex w-full gap-2">
+                {/* <Textarea ref={inputRef} placeholder="Message..." /> */}
+                <Input ref={inputRef} placeholder="Message..." />
+                <Button onClick={() => setIsPickerVisible(false)} type="submit">Send</Button>
+              </form>
+              <div style={{ position: "relative" }}>
               <Button onClick={() => setIsPickerVisible(!isPickerVisible)}>
                 {":)"}
               </Button>
@@ -163,9 +164,9 @@ function Chats() {
                 />
               </div>
             </div>
-          </div>
-        </CardFooter>
-      </Card>
+            </CardFooter>
+          </Card>
+        </div>
     </div>
   );
 }
