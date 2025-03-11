@@ -63,7 +63,7 @@ import {
       Icon: BellIcon,
       name: "CS:GO Nexa Simulateur",
       description:
-        "Vive le casino",
+        "Vive le casinoooo",
       href: "/loading",
       cta: "",
       background: <img className="absolute -right-20 -top-20 opacity-60" />,
