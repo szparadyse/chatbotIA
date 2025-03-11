@@ -59,6 +59,16 @@ import {
       background: <img className="absolute -right-20 -top-20 opacity-60" />,
       className: "lg:col-start-3 lg:col-end-3 lg:row-start-2 lg:row-end-4",
     },
+    {
+      Icon: BellIcon,
+      name: "CS:GO Nexa Simulateur",
+      description:
+        "Vive le casino",
+      href: "/loading",
+      cta: "",
+      background: <img className="absolute -right-20 -top-20 opacity-60" />,
+      className: "lg:col-start-3 lg:col-end-3 lg:row-start-2 lg:row-end-4 bg-orange-200",
+    },
   ];
   
   export function HomePage() {

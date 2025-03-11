@@ -10,5 +10,4 @@ export const skins = [
   { name: "Neil | Ramadan JS ", rarity: "Commun", chance: 18, image: "https://dam.malt.com/b423a867-3d1b-44ec-8520-54869d938124?gravity=face&func=face&face_margin=70&w=440&h=440&force_format=webp" },
   { name: "6800XT | La CG du démon", rarity: "Rare", chance: 18, image: "https://media.topachat.com/media/s600/619f92b6a5c58356de79671a.jpg" },
   { name: "Albinauric | Ton fils", rarity: "Légendaire", chance: 30, image: "https://i.pinimg.com/736x/04/df/34/04df34390f2888b227eebac2f541f463.jpg" },
-
 ];
