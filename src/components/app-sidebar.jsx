@@ -51,7 +51,7 @@ export function AppSidebar({ ...props }) {
           <h1 className="font-bold">NexAI</h1>
         </div>
       </SidebarHeader>
-      <SidebarContent>
+      <SidebarContent className="flex flex-col justify-between">
         {/* We create a SidebarGroup for each parent. */}
         {data.navMain.map((item) => (
           <SidebarGroup key={item.title}>
@@ -65,7 +65,8 @@ export function AppSidebar({ ...props }) {
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))}
-
+              </SidebarMenu>
+              <SidebarMenu>
                 {item === data.navMain[1] && (
                   <SidebarMenuItem key={"Déconnexion"}>
                     <SidebarMenuButton asChild isActive={item.isActive}>

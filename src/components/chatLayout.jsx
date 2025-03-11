@@ -1,4 +1,11 @@
 import React from "react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { Plus } from "lucide-react";
 import { Outlet } from "react-router-dom";
 import Room from "./avatarRoom";
 
@@ -79,6 +86,21 @@ export default function ChatLayout({ handleClick }) {
     <>
       <div className="flex mt-4">
         <div className="flex gap-3 flex-col items-center p-5">
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <div
+                  className="flex h-[50px] w-[50px] rounded-[25px] bg-gray-800 hover:rounded-[18px] transition-all duration-300 cursor-pointer  justify-center items-center text-white"
+                  onClick={() => alert("create room")}
+                >
+                  <Plus />
+                </div>
+              </TooltipTrigger>
+              <TooltipContent side="right">
+                <p>{"Ajouter un groupe de discussion"}</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
           {rooms.map((item) => (
             <Room
               key={item.id}
