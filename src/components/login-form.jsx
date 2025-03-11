@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Link, redirect } from "react-router-dom";
 import { useAuth } from "../contexts/authContext";
+import { ToastContainer, toast } from "react-toastify";
 
 export function LoginForm({ className, ...props }) {
   const { login, user } = useAuth();
@@ -25,6 +26,7 @@ export function LoginForm({ className, ...props }) {
       login(payload);
     } else {
       console.log("chaine vide");
+      toast("chaine vide");
     }
   };
 
