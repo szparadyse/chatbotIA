@@ -20,7 +20,7 @@ function Chat({ sender, message }) {
           <span className="flex  text-xs ml-1 text-muted-foreground">
             Envoyé par NexIA
           </span>
-          <div className="flex w-max max-w-[75%] flex-col gap-2 rounded-lg px-3 py-2 text-purple-900 text-sm bg-purple-100 my-1">
+          <div className="flex w-max max-w-[75%] flex-col gap-2 rounded-lg px-3 py-2 text-sm bg-muted my-1">
             <Markdown remarkPlugins={[remarkGfm, remarkHighlightjs]}>
               {message}
             </Markdown>

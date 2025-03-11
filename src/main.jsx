@@ -11,6 +11,7 @@ import SignUpPage from "./app/signup/page";
 import ChatLayout from "./components/chatLayout";
 import AuthProvider from "./contexts/authContext";
 import "./index.css";
+import { ProfilePage } from "./app/profile/page";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -24,6 +25,7 @@ createRoot(document.getElementById("root")).render(
           <Route element={<PrivateRoute />}>
             <Route element={<Layout />}>
               <Route path="/" element={<HomePage />} />
+              <Route path="/profile" element={<ProfilePage />} />
               <Route element={<ChatLayout />}>
                 <Route path="/room/:id" element={<Chats />} />
               </Route>
