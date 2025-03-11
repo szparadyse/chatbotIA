@@ -10,8 +10,6 @@ import { MessageCircle } from "lucide-react";
 
 import { BentoCard, BentoGrid } from "@/components/magicui/bento-grid";
 
-import { BentoCard, BentoGrid } from "@/components/magicui/bento-grid";
-
 const features = [
   {
     Icon: FileTextIcon,
