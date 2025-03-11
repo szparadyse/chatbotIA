@@ -13,6 +13,7 @@ import AuthProvider from "./contexts/authContext";
 import "./index.css";
 import { ProfilePage } from "./app/profile/page";
 import { LoadingPage } from "./app/loading/page";
+import { RoulettePage } from "./app/roulette/page";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -28,7 +29,7 @@ createRoot(document.getElementById("root")).render(
               <Route path="/" element={<HomePage />} />
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/loading" element={<LoadingPage />} />
-
+              <Route path="/roulette" element={<RoulettePage />} />
               <Route element={<ChatLayout />}>
                 <Route path="/room/:id" element={<Chats />} />
               </Route>
