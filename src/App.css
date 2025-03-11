@@ -1,8 +1,45 @@
+@import "tailwindcss/preflight";
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+}
+
+/* Animation d'ouverture de la caisse */
+@keyframes open {
+  0% {
+    transform: rotateX(0deg);
+  }
+  100% {
+    transform: rotateX(90deg);
+  }
+}
+
+.animate-open {
+  animation: open 0.5s ease-in-out forwards;
+}
+
+/* Styles pour la caisse */
+.crate-lid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 25%;
+  background-color: #b45309; /* Equivalent to bg-yellow-800 */
+  transform-origin: top;
+  transition: transform 500ms;
+}
+
+.crate-body {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 75%;
+  background-color: #3b2f00; /* Equivalent to bg-yellow-900 */
 }
 
 .logo {

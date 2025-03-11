@@ -12,6 +12,7 @@ import ChatLayout from "./components/chatLayout";
 import AuthProvider from "./contexts/authContext";
 import "./index.css";
 import { ProfilePage } from "./app/profile/page";
+import { LoadingPage } from "./app/loading/page";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -26,6 +27,8 @@ createRoot(document.getElementById("root")).render(
             <Route element={<Layout />}>
               <Route path="/" element={<HomePage />} />
               <Route path="/profile" element={<ProfilePage />} />
+              <Route path="/loading" element={<LoadingPage />} />
+
               <Route element={<ChatLayout />}>
                 <Route path="/room/:id" element={<Chats />} />
               </Route>
