@@ -21,7 +21,7 @@ function validatePassword(password) {
 
 // Vérification du champ de confirmation du mot de passe
 function validateConfirmPassword(password, confirmPassword) {
-  bool = false;
+  let bool = false;
   if (password == confirmPassword) {
     bool = true;
   }

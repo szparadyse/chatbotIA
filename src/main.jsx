@@ -16,6 +16,8 @@ import { LoadingPage } from "./app/loading/page";
 import { RoulettePage } from "./app/roulette/page";
 import { ToastContainer, toast } from "react-toastify";
 import SloteMachine from "./app/slotMachine/page";
+import NavalBattleHome from "./app/dashboard/NavalBattle/NavalBattleHome";
+import NavalBattleField from "./app/dashboard/NavalBattle/NavalBattleField";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -32,10 +34,15 @@ createRoot(document.getElementById("root")).render(
               <Route path="/profile" element={<ProfilePage />} />
               <Route path="/loading" element={<LoadingPage />} />
               <Route path="/roulette" element={<RoulettePage />} />
+              <Route path="/navalBattle" element={<NavalBattleHome />} />
+              <Route
+                path="/navalBattle/room/:id"
+                element={<NavalBattleField />}
+              />
               <Route element={<ChatLayout />}>
                 <Route path="/room/:id" element={<Chats />} />
               </Route>
-              <Route path="/slotMachine" element={<SloteMachine/>} />
+              <Route path="/slotMachine" element={<SloteMachine />} />
             </Route>
           </Route>
         </Routes>

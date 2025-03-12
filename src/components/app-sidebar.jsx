@@ -28,6 +28,10 @@ const data = {
           title: "Chat Bot AI ",
           url: "/room/1",
         },
+        {
+          title: "Bataille navale ",
+          url: "/navalBattle",
+        },
       ],
     },
     {
