@@ -1,0 +1,24 @@
+.scratch-container {
+}
+
+.flexcentercolumn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.flexcenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tick-buraliste {
+  padding: 30px 40px;
+  color: white;
+  border: 1px solid black;
+  margin: 10px 5px;
+  font-family: system-ui;
+  font-size: x-large;
+}

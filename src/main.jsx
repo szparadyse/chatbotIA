@@ -12,6 +12,7 @@ import ChatLayout from "./components/chatLayout";
 import AuthProvider from "./contexts/authContext";
 import "./index.css";
 import { ProfilePage } from "./app/profile/page";
+import { Scratch } from "./app/scratch/Page";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -29,6 +30,7 @@ createRoot(document.getElementById("root")).render(
               <Route element={<ChatLayout />}>
                 <Route path="/room/:id" element={<Chats />} />
               </Route>
+              <Route path="/scratch" element={<Scratch />} />
             </Route>
           </Route>
         </Routes>
