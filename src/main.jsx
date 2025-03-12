@@ -15,6 +15,7 @@ import { ProfilePage } from "./app/profile/page";
 import { LoadingPage } from "./app/loading/page";
 import { RoulettePage } from "./app/roulette/page";
 import { ToastContainer, toast } from "react-toastify";
+import SloteMachine from "./app/slotMachine/page";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -34,6 +35,7 @@ createRoot(document.getElementById("root")).render(
               <Route element={<ChatLayout />}>
                 <Route path="/room/:id" element={<Chats />} />
               </Route>
+              <Route path="/slotMachine" element={<SloteMachine/>} />
             </Route>
           </Route>
         </Routes>
