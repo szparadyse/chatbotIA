@@ -6,6 +6,7 @@ import { Link, redirect, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/authContext";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { toasty } from "../lib/utils";
 
 function validatePassword(password) {
   // Longueur minimale et maximale du mot de passe
@@ -50,19 +51,19 @@ export function SignUpForm({ className, ...props }) {
             res === true ? navigate("/login") : ""
           );
         } else {
-          toast("les mots de passes ne sont pas identiques");
+          toasty.error("les mots de passes ne sont pas identiques");
           console.log("les mots de passes ne sont pas identiques");
         }
       } else {
-        console.log(
+        toasty.error(
           "Le mot de passe doit contenir Miniscules / Majuscules / chiffres / caractères spéciaux"
         );
-        toast(
+        console.log(
           "Le mot de passe doit contenir Miniscules / Majuscules / chiffres / caractères spéciaux"
         );
       }
     } else {
-      toast("chaine vide");
+      toasty.error("chaine vide");
       console.log("chaine vide");
     }
   };
@@ -103,7 +104,6 @@ export function SignUpForm({ className, ...props }) {
         <Button type="submit" className="w-full">
           rejoins la team DTR
         </Button>
-        <ToastContainer />
       </div>
       <div className="text-center text-sm">
         {" "}

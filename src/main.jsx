@@ -14,6 +14,7 @@ import "./index.css";
 import { ProfilePage } from "./app/profile/page";
 import { LoadingPage } from "./app/loading/page";
 import { RoulettePage } from "./app/roulette/page";
+import { ToastContainer, toast } from "react-toastify";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -37,6 +38,7 @@ createRoot(document.getElementById("root")).render(
           </Route>
         </Routes>
       </BrowserRouter>
+      <ToastContainer />
     </AuthProvider>
   </StrictMode>
 );
