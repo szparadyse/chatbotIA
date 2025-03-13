@@ -10,11 +10,15 @@ export default function ScratcProvider({ children }) {
     setMoney((prev) => prev + amount);
   };
 
+  const setNewTicket = (ticket) => {
+    setTickets((prev) => [...prev, ticket]);
+  };
+
   const contextValues = {
     setNewMoney,
     money: money,
     tickets: tickets,
-    setTickets: setTickets,
+    setNewTicket: setNewTicket,
   };
 
   return (
