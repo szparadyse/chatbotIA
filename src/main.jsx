@@ -15,30 +15,33 @@ import { ProfilePage } from "./app/profile/page";
 import { Scratch } from "./app/scratch/Page";
 import { LoadingPage } from "./app/loading/page";
 import { RoulettePage } from "./app/roulette/page";
+import ScratcProvider from "./contexts/ScratchContext";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route element={<PublicRoute />}>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/signup" element={<SignUpPage />} />
-          </Route>
-          <Route element={<PrivateRoute />}>
-            <Route element={<Layout />}>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/profile" element={<ProfilePage />} />
-              <Route path="/loading" element={<LoadingPage />} />
-              <Route path="/roulette" element={<RoulettePage />} />
-              <Route element={<ChatLayout />}>
-                <Route path="/room/:id" element={<Chats />} />
-              </Route>
-              <Route path="/scratch" element={<Scratch />} />
+      <ScratcProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route element={<PublicRoute />}>
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/signup" element={<SignUpPage />} />
             </Route>
-          </Route>
-        </Routes>
-      </BrowserRouter>
+            <Route element={<PrivateRoute />}>
+              <Route element={<Layout />}>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/loading" element={<LoadingPage />} />
+                <Route path="/roulette" element={<RoulettePage />} />
+                <Route element={<ChatLayout />}>
+                  <Route path="/room/:id" element={<Chats />} />
+                </Route>
+                <Route path="/scratch" element={<Scratch />} />
+              </Route>
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </ScratcProvider>
     </AuthProvider>
   </StrictMode>
 );
