@@ -3,8 +3,7 @@ import Roulette from "../../components/roulette";
 
 export const RoulettePage = () => {
   return (
-    <div>
-      Roulette
+    <div className="flex justify-center">
       <Roulette />
     </div>
   );
