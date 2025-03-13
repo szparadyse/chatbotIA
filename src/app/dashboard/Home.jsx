@@ -6,7 +6,7 @@ import {
   InputIcon,
 } from "@radix-ui/react-icons";
 
-import { MessageCircle } from "lucide-react";
+import { MessageCircle, ShipIcon } from "lucide-react";
 
 import { BentoCard, BentoGrid } from "@/components/magicui/bento-grid";
 
@@ -61,7 +61,7 @@ const features = [
       "lg:col-start-3 lg:col-end-3 lg:row-start-1 lg:row-end-2 bg-lime-200",
   },
   {
-    Icon: BellIcon,
+    Icon: ShipIcon,
     name: "Bataille navale",
     description: "Vive le casinoooo",
     href: "/navalBattle",

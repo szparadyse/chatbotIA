@@ -16,8 +16,8 @@ import { LoadingPage } from "./app/loading/page";
 import { RoulettePage } from "./app/roulette/page";
 import { ToastContainer, toast } from "react-toastify";
 import SloteMachine from "./app/slotMachine/page";
-import NavalBattleHome from "./app/dashboard/NavalBattle/NavalBattleHome";
-import NavalBattleField from "./app/dashboard/NavalBattle/NavalBattleField";
+import NavalBattleHome from "./app/navalBattle/NavalBattleHome";
+import NavalBattleField from "./app/navalBattle/NavalBattleField";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
