@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { SearchForm } from "@/components/search-form";
+import { Button } from "@/components/ui/button";
 import {
   Sidebar,
   SidebarContent,
@@ -13,9 +13,8 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from "@/components/ui/sidebar";
-import { Button } from "@/components/ui/button";
-import { useAuth } from "../contexts/authContext";
 import { Bot } from "lucide-react";
+import { useAuth } from "../contexts/authContext";
 
 // This is sample data.
 const data = {
@@ -31,6 +30,10 @@ const data = {
         {
           title: "Bataille navale ",
           url: "/navalBattle",
+        },
+        {
+          title: "Slot machine ",
+          url: "/slotMachine",
         },
       ],
     },
@@ -49,10 +52,10 @@ export function AppSidebar({ ...props }) {
     <Sidebar {...props}>
       <SidebarHeader>
         <div className="flex pl-2 gap-2">
-          <a href={"/"}>
+          <a href={"/"} className="flex items-center gap-2">
             <Bot />
-          </a>
           <h1 className="font-bold">NexAI</h1>
+          </a>
         </div>
       </SidebarHeader>
       <SidebarContent className="flex flex-col justify-between">
