@@ -10,6 +10,7 @@ import PublicRoute from "./app/routes/PublicRoute";
 import SignUpPage from "./app/signup/page";
 import ChatLayout from "./components/chatLayout";
 import AuthProvider from "./contexts/authContext";
+import ScratchContext from "./contexts/ScratchContext";
 import "./index.css";
 import { ProfilePage } from "./app/profile/page";
 import { Scratch } from "./app/scratch/Page";
@@ -23,33 +24,35 @@ import NavalBattleField from "./app/dashboard/NavalBattle/NavalBattleField";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route element={<PublicRoute />}>
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/signup" element={<SignUpPage />} />
-          </Route>
-          <Route element={<PrivateRoute />}>
-            <Route element={<Layout />}>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/profile" element={<ProfilePage />} />
-              <Route path="/loading" element={<LoadingPage />} />
-              <Route path="/roulette" element={<RoulettePage />} />
-              <Route path="/navalBattle" element={<NavalBattleHome />} />
-              <Route
-                path="/navalBattle/room/:id"
-                element={<NavalBattleField />}
-              />
-              <Route element={<ChatLayout />}>
-                <Route path="/room/:id" element={<Chats />} />
-              </Route>
-              <Route path="/slotMachine" element={<SloteMachine />} />
-              <Route path="/scratch" element={<Scratch />} />
+      <ScratchContext>
+        <BrowserRouter>
+          <Routes>
+            <Route element={<PublicRoute />}>
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/signup" element={<SignUpPage />} />
             </Route>
-          </Route>
-        </Routes>
-      </BrowserRouter>
-      <ToastContainer />
+            <Route element={<PrivateRoute />}>
+              <Route element={<Layout />}>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/profile" element={<ProfilePage />} />
+                <Route path="/loading" element={<LoadingPage />} />
+                <Route path="/roulette" element={<RoulettePage />} />
+                <Route path="/navalBattle" element={<NavalBattleHome />} />
+                <Route
+                  path="/navalBattle/room/:id"
+                  element={<NavalBattleField />}
+                />
+                <Route element={<ChatLayout />}>
+                  <Route path="/room/:id" element={<Chats />} />
+                </Route>
+                <Route path="/slotMachine" element={<SloteMachine />} />
+                <Route path="/scratch" element={<Scratch />} />
+              </Route>
+            </Route>
+          </Routes>
+        </BrowserRouter>
+        <ToastContainer />
+      </ScratchContext>
     </AuthProvider>
   </StrictMode>
 );

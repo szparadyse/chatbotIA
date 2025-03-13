@@ -8,15 +8,16 @@ import buralistefille from "../../assets/buralistefille.webp";
 import { motion } from "motion/react";
 import bell from "../../assets/bell.wav";
 import dorkus from "../../assets/Dorkus64.mp3";
+import musicburaliste from "../../assets/musicburaliste.mp3";
 import { useScratch } from "../../contexts/ScratchContext";
 
 export function Scratch() {
-  const [money, setMoney] = useState(10000);
-  const { tickets, setTickets } = useScratch();
+  const { setNewMoney, money, tickets, setNewTicket } = useScratch();
   const [atBuraliste, setAtBuraliste] = useState(true);
   const [phraseBuraliste, setPhraseBuraliste] = useState("");
   const [imgBuraliste, setImgBuraliste] = useState(null);
   const [audio, setAudio] = useState(null);
+  const [volume, setVolume] = useState(0.5);
 
   useEffect(() => {
     const randomBuraliste = () => {
@@ -46,10 +47,10 @@ export function Scratch() {
   }, [atBuraliste]);
 
   const buyTicket = (t, e) => {
-    if (money > t.price) {
-      setTickets((prev) => [...prev, t]);
+    if (money >= t.price) {
+      setNewTicket(t);
       setPhraseBuraliste(`Bien sûr! Voici votre ${t.name}.`);
-      setMoney((prev) => prev - t.price);
+      setNewMoney(-1 * t.price);
     } else {
       setPhraseBuraliste(`Monsieur, revenez quand vous aurez de quoi payer !!`);
     }
@@ -61,6 +62,7 @@ export function Scratch() {
       audio.currentTime = 0;
     }
     const newAudio = new Audio(e);
+    newAudio.volume = volume;
     newAudio.play();
     setAudio(newAudio);
   };
@@ -72,6 +74,8 @@ export function Scratch() {
 
   const timeToBuy = () => {
     play(bell);
+    setTimeout(() => {}, 200);
+    play(musicburaliste);
     setAtBuraliste(true);
   };
 
@@ -127,15 +131,24 @@ export function Scratch() {
             </div>
           </div>
         ) : (
-          <Ticket />
+          <div className="flexcentercolumn">
+            <Ticket />
+          </div>
         )}
       </div>
       <div className="overlay">
+        <input
+          type="range"
+          min="0"
+          max="1"
+          step="0.01"
+          value={volume}
+          onChange={(e) => setVolume(e.target.value)}
+        />
         <div className="displayMoney">{money}€</div>
         <div className="flexcentercolumn maxWidth">
           {tickets.map((t) => (
             <motion.div
-              key={t.id}
               className="tick-buraliste"
               style={{
                 backgroundImage: `linear-gradient(135deg, ${t.color}, ${t.subcolor})`,
