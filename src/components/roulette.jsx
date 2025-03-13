@@ -1,18 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { Wheel } from "react-custom-roulette";
 import { toast, ToastContainer } from "react-toastify";
+import { Button } from "./ui/button";
+import { confettiSideCannons } from "./slotMachine/confetti";
 
 export default function CasinoRoulette() {
   const [pair, setPair] = useState(0);
   const [mise, setMise] = useState(0);
-  let color = 0;
-  let num = 0;
-  let half = 0;
   const [tab, setTab] = useState([0, 0, 0, 0, 0]);
   const [nonVide, setnonVide] = useState(false);
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
   const [winningNumber, setWinningNumber] = useState(null); // Stocke le numéro gagnant
+  let color = 0;
+  let num = 0;
+  let half = 0;
 
   function ajouterMise(e) {
     const valeur = e.target.getAttribute("data");
@@ -53,11 +55,11 @@ export default function CasinoRoulette() {
     if (result == 0) {
       return 0;
     } else if (result % 2 == 0 && pair == 0) {
-      toast("WIIIIIIN");
+      confettiSideCannons();
       console.log("WIIIIIIN");
       return mise * 2;
     } else if (result % 2 == 1 && pair == 1) {
-      toast("WIIIIIIN");
+      confettiSideCannons();
       console.log("WIIIIIIN");
       return mise * 2;
     } else return 0;
@@ -160,9 +162,7 @@ export default function CasinoRoulette() {
   };
 
   return (
-    <div style={{ textAlign: "center", padding: "20px" }}>
-      <ToastContainer />
-      <h2>🎰 Roulette de Casino</h2>
+    <div>
       <Wheel
         mustStartSpinning={mustSpin}
         prizeNumber={prizeNumber}
@@ -174,118 +174,44 @@ export default function CasinoRoulette() {
           setWinningNumber(data[prizeNumber].option); // Stocke le numéro gagné
         }}
       />
-      <button
-        onClick={handleSpinClick}
-        style={{
-          marginTop: "20px",
-          padding: "10px 20px",
-          fontSize: "16px",
-          cursor: "pointer",
-          background: "gold",
-          color: "black",
-          border: "none",
-          borderRadius: "5px",
-          fontWeight: "bold",
-        }}
-      >
+      <Button onClick={handleSpinClick} className="flex">
         🎲 Tourner la Roulette
-      </button>
-      <h3>{mise}</h3>
-      <button
-        onClick={ajouterMise}
-        data={1}
-        style={{
-          marginTop: "20px",
-          padding: "10px 20px",
-          fontSize: "16px",
-          cursor: "pointer",
-          background: "gold",
-          color: "black",
-          border: "none",
-          borderRadius: "5px",
-          fontWeight: "bold",
-        }}
-      >
-        +1
-      </button>
-      <button
-        onClick={ajouterMise}
-        data={10}
-        style={{
-          marginTop: "20px",
-          padding: "10px 20px",
-          fontSize: "16px",
-          cursor: "pointer",
-          background: "gold",
-          color: "black",
-          border: "none",
-          borderRadius: "5px",
-          fontWeight: "bold",
-        }}
-      >
-        +10
-      </button>
-      <button
-        onClick={ajouterMise}
-        data={100}
-        style={{
-          marginTop: "20px",
-          padding: "10px 20px",
-          fontSize: "16px",
-          cursor: "pointer",
-          background: "gold",
-          color: "black",
-          border: "none",
-          borderRadius: "5px",
-          fontWeight: "bold",
-        }}
-      >
-        +100
-      </button>
-      <button
-        onClick={() => {
-          let table = tab;
-          table[4] = mise;
-          setTab(table);
-          setPair(1);
-          setnonVide(true);
-        }}
-        style={{
-          marginTop: "20px",
-          padding: "10px 20px",
-          fontSize: "16px",
-          cursor: "pointer",
-          background: "gold",
-          color: "black",
-          border: "none",
-          borderRadius: "5px",
-          fontWeight: "bold",
-        }}
-      >
-        miser impair
-      </button>
-      <button
-        onClick={() => {
-          let table = tab;
-          table[4] = mise;
-          setTab(table);
-          setPair(0);
-          setnonVide(true);
-        }}
-        style={{
-          marginTop: "20px",
-          padding: "10px 20px",
-          fontSize: "16px",
-          cursor: "pointer",
-          background: "gold",
-          color: "black",
-          border: "none",
-          borderRadius: "5px",
-          fontWeight: "bold",
-        }}
-      >
-        miser pair
-      </button>
+      </Button>
+
+      <div className="flex gap-4 items-center">
+        <Button onClick={ajouterMise} data={1}>
+          +1
+        </Button>
+        <Button onClick={ajouterMise} data={10}>
+          +10
+        </Button>
+        <Button onClick={ajouterMise} data={100}>
+          +100
+        </Button>
+        <Button
+          onClick={() => {
+            let table = tab;
+            table[4] = mise;
+            setTab(table);
+            setPair(1);
+            setnonVide(true);
+          }}
+        >
+          miser impair
+        </Button>
+        <Button
+          onClick={() => {
+            let table = tab;
+            table[4] = mise;
+            setTab(table);
+            setPair(0);
+            setnonVide(true);
+          }}
+        >
+          miser pair
+        </Button>
+        <span>Mise actuelle : {mise}</span>
+      </div>
 
       {/* Affichage du résultat après le spin */}
       {winningNumber !== null && (
