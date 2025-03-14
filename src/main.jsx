@@ -20,6 +20,7 @@ import { ToastContainer, toast } from "react-toastify";
 import SloteMachine from "./app/slotMachine/page";
 import NavalBattleHome from "./app/navalBattle/NavalBattleHome";
 import NavalBattleField from "./app/navalBattle/NavalBattleField";
+import { MeetPage } from "./app/meet/page";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
