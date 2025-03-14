@@ -11,6 +11,7 @@ import dorkus from "../../assets/Dorkus64.mp3";
 import musicburaliste from "../../assets/musicburaliste.mp3";
 import { useScratch } from "../../contexts/ScratchContext";
 import { TypingAnimation } from "../../components/magicui/typing-animation";
+import { useAuth } from "../../contexts/authContext";
 
 export function Scratch() {
   const { tickets, setNewTicket } = useScratch();
