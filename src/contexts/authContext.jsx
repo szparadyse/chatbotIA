@@ -1,10 +1,12 @@
 import { useEffect, useState, useContext, createContext } from "react";
+import { toast } from "react-toastify";
 
 const authContext = createContext();
 
 export default function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [wallet, setWallet] = useState(0);
 
   useEffect(() => {
     checkUser().then(() => setIsLoading(false));
@@ -94,11 +96,39 @@ export default function AuthProvider({ children }) {
     localStorage.removeItem("token");
   };
 
+  const updateWallet = async (amount)=> {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_DB_URI}/api/auth/wallet/update`,
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({amount}),
+        }
+      );
+      if (response.ok) {
+        setWallet(response.data.amount)
+        return true; 
+      } else if (response.status === 400) {
+        // toast.warn(response.message)
+        return false;
+      }
+    } catch (err) {
+      toast.warn('Error')
+      return err;
+    }
+  }
+
   const contextValues = {
     login,
     logout,
     register,
     user: user,
+    updateWallet,
+    setWallet,
   };
 
   return (
