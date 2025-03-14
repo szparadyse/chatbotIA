@@ -95,9 +95,9 @@ export function SignUpForm({ className, ...props }) {
             <Label htmlFor="password">confirme ton numéro de sécu</Label>
           </div>
           <Input
-            id="confirmpassword"
+            id="confirmPassword"
             type="password"
-            name="confirmpassword"
+            name="confirmPassword"
             required
           />
         </div>
