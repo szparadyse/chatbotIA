@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { confettiSideCannons } from "../../components/slotMachine/confetti";
-import "./style.scss";
-import spinning from "../../assets/slotmachine/song/spinning.mp3";
-import jackpot from "../../assets/slotmachine/song/jackpot.mp3";
 import machineBody from "../../assets/slotmachine/machineBody.png";
+import jackpot from "../../assets/slotmachine/song/jackpot.mp3";
+import spinning from "../../assets/slotmachine/song/spinning.mp3";
 import spinButton from "../../assets/slotmachine/spin-btn.png";
-import background from "../../assets/slotmachine/bg-slot-machine.webp";
+import { confettiSideCannons } from "../../components/slotMachine/confetti";
+import MiseSelector from "../../components/slotMachine/miseSelector";
+import "./style.scss";
 
 export default function SloteMachine() {
   const [resultat, setResultat] = useState(["?", "?", "?"]);
@@ -18,6 +18,9 @@ export default function SloteMachine() {
   const [isYellowLed, setIsYellowLed] = useState(false);
 
   const tableau = ["🍎", "🍌", "🍇", "🍒", "🍓", "🥝", "🥭", "🍊", "🍇", "🍈"];
+  const tableauDesMises = [1, 5, 10, 25, 50, 100];
+  
+  const [mise, setMise] = useState(tableauDesMises[0]);
 
   useEffect(() => {
     yellowLed.current = document.querySelector(".yellow-led");
@@ -126,6 +129,7 @@ export default function SloteMachine() {
             draggable="false"
             onClick={random}
           />
+          <MiseSelector tableauDesMises={tableauDesMises}  setMise={setMise} mise={mise}/>
         </div>
       </div>
     </div>
