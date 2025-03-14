@@ -10,9 +10,11 @@ import bell from "../../assets/bell.wav";
 import dorkus from "../../assets/Dorkus64.mp3";
 import musicburaliste from "../../assets/musicburaliste.mp3";
 import { useScratch } from "../../contexts/ScratchContext";
+import { TypingAnimation } from "../../components/magicui/typing-animation";
 
 export function Scratch() {
   const { setNewMoney, money, tickets, setNewTicket } = useScratch();
+  const {} = useAuth();
   const [atBuraliste, setAtBuraliste] = useState(true);
   const [phraseBuraliste, setPhraseBuraliste] = useState("");
   const [imgBuraliste, setImgBuraliste] = useState(null);
@@ -107,7 +109,11 @@ export function Scratch() {
         {atBuraliste ? (
           <div className="flexcentercolumn">
             {imgBuraliste}
-            <p className="phraseBuraliste">{phraseBuraliste}</p>
+
+            <TypingAnimation className="phraseBuraliste" duration={40}>
+              {phraseBuraliste}
+            </TypingAnimation>
+
             <div className="flexcenter">
               {propalByBuraliste.map((t) => {
                 return (

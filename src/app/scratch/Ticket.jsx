@@ -1,9 +1,12 @@
 import { ScratchToReveal } from "@/components/magicui/scratch-to-reveal";
 import { useEffect, useState } from "react";
 import { useScratch } from "../../contexts/ScratchContext";
-import { Button } from "@/components/ui/button";
 import yeuxrouge from "../../assets/yeuxrouge.webp";
 import trash from "../../assets/trash.webp";
+import cacsou from "../../assets/cacsou.webp";
+import plusrien from "../../assets/plusrien.webp";
+import { Meteors } from "../../components/magicui/meteors";
+import { ConfettiParty } from "./conf";
 
 export function Ticket() {
   const [result, setResult] = useState(0);
@@ -22,17 +25,17 @@ export function Ticket() {
   };
 
   const calculWin = () => {
-    let random = Math.random() * 100; // Utilisation d'une variable locale
+    let random = Math.random() * 100;
     let cumulative = 0;
     for (const obj of ticket.winRate) {
       const [value, probability] = Object.entries(obj)[0];
       cumulative += probability;
       if (random < cumulative) {
-        setResult(Number(value)); // S'assurer que la valeur est bien un nombre
+        setResult(Number(value));
         return;
       }
     }
-    setResult(0); // Si aucun gain n'a été trouvé
+    setResult(0);
   };
 
   const afterPlay = () => {
@@ -72,14 +75,15 @@ export function Ticket() {
             <>
               {victory ? (
                 <div
-                  style={{ backgroundImage: `url(${yeuxrouge})` }}
+                  style={{ backgroundImage: `url(${cacsou})` }}
                   onClick={rematch}
                   className="allscreen"
                 >
-                  <span className="size120 animate-pulse text-yellow-400 drop-shadow-[0_0_10px_rgba(255,223,0,0.8)]">
+                  <ConfettiParty />
+                  <span className="size120 animate-pulse text-neutral-600 drop-shadow-[0_0_10px_rgba(255,223,0,1.8)]">
                     ✨ + {result}€ ✨
                   </span>
-                  <span className="size120 animate-pulse text-yellow-400 drop-shadow-[0_0_10px_rgba(255,223,0,0.8)]">
+                  <span className="size50 animate-pulse text-black-900 drop-shadow-[0_0_10px_rgba(255,223,0,0.8)]">
                     Victoire ...
                   </span>
                 </div>
@@ -135,7 +139,13 @@ export function Ticket() {
           )}
         </>
       ) : (
-        <div className="flexcenter">Vous n'avez plus aucun ticket ....</div>
+        <div
+          style={{ backgroundImage: `url(${plusrien})` }}
+          className="allscreen"
+        >
+          <Meteors number={30} />
+          <div className="flexcenter">Vous n'avez plus aucun ticket ....</div>
+        </div>
       )}
     </>
   );
