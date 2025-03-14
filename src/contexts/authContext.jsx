@@ -96,7 +96,7 @@ export default function AuthProvider({ children }) {
     localStorage.removeItem("token");
   };
 
-  const updateWallet = async (amount)=> {
+  const updateWallet = async (amount) => {
     try {
       const response = await fetch(
         `${import.meta.env.VITE_DB_URI}/api/auth/wallet/update`,
@@ -106,21 +106,21 @@ export default function AuthProvider({ children }) {
             Accept: "application/json",
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({amount}),
+          body: JSON.stringify({ amount }),
         }
       );
       if (response.ok) {
-        setWallet(response.data.amount)
-        return true; 
+        setWallet(response.data.amount);
+        return true;
       } else if (response.status === 400) {
         // toast.warn(response.message)
         return false;
       }
     } catch (err) {
-      toast.warn('Error')
+      toast.warn("Error");
       return err;
     }
-  }
+  };
 
   const contextValues = {
     login,
@@ -129,6 +129,7 @@ export default function AuthProvider({ children }) {
     user: user,
     updateWallet,
     setWallet,
+    wallet: wallet,
   };
 
   return (

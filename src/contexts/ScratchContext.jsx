@@ -6,11 +6,7 @@ export default function ScratcProvider({ children }) {
   const [money, setMoney] = useState(0);
   const [tickets, setTickets] = useState([]);
 
-  useEffect(() => {
-    localStorage.getItem("money")
-      ? setMoney(localStorage.getItem("money"))
-      : localStorage.setItem("money", 50);
-  }, []);
+  useEffect(() => {}, []);
 
   const getMoney = () => {
     localStorage.getItem("money");

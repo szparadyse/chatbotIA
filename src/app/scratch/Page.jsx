@@ -13,8 +13,8 @@ import { useScratch } from "../../contexts/ScratchContext";
 import { TypingAnimation } from "../../components/magicui/typing-animation";
 
 export function Scratch() {
-  const { setNewMoney, money, tickets, setNewTicket } = useScratch();
-  const {} = useAuth();
+  const { tickets, setNewTicket } = useScratch();
+  const { wallet, updateWallet } = useAuth();
   const [atBuraliste, setAtBuraliste] = useState(true);
   const [phraseBuraliste, setPhraseBuraliste] = useState("");
   const [imgBuraliste, setImgBuraliste] = useState(null);
@@ -49,10 +49,10 @@ export function Scratch() {
   }, [atBuraliste]);
 
   const buyTicket = (t, e) => {
-    if (money >= t.price) {
+    if (wallet >= t.price) {
       setNewTicket(t);
       setPhraseBuraliste(`Bien sûr! Voici votre ${t.name}.`);
-      setNewMoney(-1 * t.price);
+      updateWallet(-1 * t.price);
     } else {
       setPhraseBuraliste(`Monsieur, revenez quand vous aurez de quoi payer !!`);
     }
@@ -151,7 +151,6 @@ export function Scratch() {
           value={volume}
           onChange={(e) => setVolume(e.target.value)}
         />
-        <div className="displayMoney">{money}€</div>
         <div className="flexcentercolumn maxWidth">
           {tickets.map((t) => (
             <motion.div

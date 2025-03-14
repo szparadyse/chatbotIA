@@ -7,10 +7,12 @@ import cacsou from "../../assets/cacsou.webp";
 import plusrien from "../../assets/plusrien.webp";
 import { Meteors } from "../../components/magicui/meteors";
 import { ConfettiParty } from "./conf";
+import { useAuth } from "../../contexts/authContext";
 
 export function Ticket() {
   const [result, setResult] = useState(0);
-  const { setNewMoney, tickets, removeTicket } = useScratch();
+  const { tickets, removeTicket } = useScratch();
+  const { updateWallet } = useAuth();
   const [ticket, setTicket] = useState(tickets[0]);
   const [victory, setVictory] = useState(false);
   const [playing, setPlaying] = useState(true);
@@ -40,7 +42,7 @@ export function Ticket() {
 
   const afterPlay = () => {
     if (result > 0) {
-      setNewMoney(result);
+      updateWallet(result);
       setPlaying(false);
       setVictory(true);
     } else {
