@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext, createContext } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 const authContext = createContext();
@@ -98,6 +98,7 @@ export default function AuthProvider({ children }) {
 
   const updateWallet = async (amount) => {
     try {
+      const token = localStorage.getItem("token");
       const response = await fetch(
         `${import.meta.env.VITE_DB_URI}/api/auth/wallet/update`,
         {
@@ -105,6 +106,7 @@ export default function AuthProvider({ children }) {
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify({ amount }),
         }

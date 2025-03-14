@@ -5,6 +5,7 @@ import spinning from "../../assets/slotmachine/song/spinning.mp3";
 import spinButton from "../../assets/slotmachine/spin-btn.png";
 import { confettiSideCannons } from "../../components/slotMachine/confetti";
 import MiseSelector from "../../components/slotMachine/miseSelector";
+import { useAuth } from "../../contexts/authContext";
 import "./style.scss";
 
 export default function SloteMachine() {
@@ -19,7 +20,8 @@ export default function SloteMachine() {
 
   const tableau = ["🍎", "🍌", "🍇", "🍒", "🍓", "🥝", "🥭", "🍊", "🍇", "🍈"];
   const tableauDesMises = [1, 5, 10, 25, 50, 100];
-  
+  const {user, updateWallet} = useAuth();
+
   const [mise, setMise] = useState(tableauDesMises[0]);
 
   useEffect(() => {
@@ -76,13 +78,25 @@ export default function SloteMachine() {
             handleYellowLed();
           }, 500);
           setIsSpinning(false);
+          handleUpdateWallet()
         }, 3000);
       } else {
         setHasWon(false);
         setIsSpinning(false);
+        handleUpdateWallet()
       }
     }
   }, [resultat]);
+
+  const handleUpdateWallet = ()=> {
+    if ((resultat[0] === resultat[1] && resultat[1] === resultat[2] ) && resultat.length > 0 && resultat[0] !== "?") {
+      updateWallet(user.wallet + (mise * 3))
+    }else if((resultat[0] === resultat[1] || resultat[1] === resultat[2] || resultat[0] === resultat[2]) && resultat.length > 0 && resultat[0] !== "?"){
+      updateWallet(user.wallet + (mise * 2))
+    }else {
+      updateWallet(user.wallet - mise)
+    }
+  }
 
   const handleYellowLed = () => {
     let count = 0; // Nombre de clignotements
