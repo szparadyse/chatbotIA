@@ -22,7 +22,7 @@ export const ChatRtc = () => {
   }, [remoteStreams]);
 
   useEffect(() => {
-    socket.current = new WebSocket(`ws://localhost:3300/ws/rtc/${roomId}`);
+    socket.current = new WebSocket(`ws://172.27.74.25:3300/ws/rtc/${roomId}`);
 
     // Handle WebSocket open and close events
     socket.current.onopen = () => {

@@ -31,6 +31,7 @@ createRoot(document.getElementById("root")).render(
             <Route element={<PublicRoute />}>
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignUpPage />} />
+              <Route path="/meet/:roomId" element={<MeetPage />} />
             </Route>
             <Route element={<PrivateRoute />}>
               <Route element={<Layout />}>
